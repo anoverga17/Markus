@@ -1,6 +1,6 @@
 repos:
   -   repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v2.3.0
+      rev: v4.0.1
       hooks:
         -   id: check-yaml
             exclude: |
@@ -15,7 +15,7 @@ repos:
         - id: prettier
           types_or: [javascript, jsx, css, scss, html]
   -   repo: https://github.com/awebdeveloper/pre-commit-stylelint
-      rev: 8f63da4
+      rev: 0.0.2
       hooks:
         - id: stylelint
           additional_dependencies: [
