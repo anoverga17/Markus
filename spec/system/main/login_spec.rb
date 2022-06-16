@@ -1,5 +1,6 @@
 describe 'logging in', type: :system do
   let(:simulate_login) do
+    puts("\n\n\n\n\n\n\n\n\n SYSTEM TESTS ARE RUNNING \n\n\n\n\n\n\n\n\n\n")
     # Go to root path
     visit root_path
     # Select option to log in using MarkUs
