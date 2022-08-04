@@ -30,7 +30,7 @@ module SessionHandler
     if current_user&.admin_user?
       @current_role ||= AdminRole.find_or_create_by(user: current_user, course: current_course)
     else
-      @current_role ||= Role.find_by(user: current_user, course: current_course)
+      @current_role ||= Role.find_by(user: current_user, course: current_course, hidden: false)
     end
   end
 
@@ -38,7 +38,7 @@ module SessionHandler
     if real_user&.admin_user?
       @real_role ||= AdminRole.find_or_create_by(user: real_user, course: current_course)
     else
-      @real_role ||= Role.find_by(user: real_user, course: current_course)
+      @real_role ||= Role.find_by(user: real_user, course: current_course, hidden: false)
     end
   end
 
