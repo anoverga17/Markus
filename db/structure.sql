@@ -19,19 +19,14 @@ CREATE FUNCTION public.check_repo_permissions(user_name_ character varying, cour
 DECLARE
     role_type varchar;
     role_id_ integer;
-    role_hidden boolean;
 BEGIN
-    SELECT roles.id, roles.type, roles.hidden
-    INTO role_id_, role_type, role_hidden
+    SELECT roles.id, roles.type
+    INTO role_id_, role_type
     FROM users
         JOIN roles ON roles.user_id=users.id
         JOIN courses ON roles.course_id=courses.id
-    WHERE courses.name=course_name AND users.user_name=user_name_
+    WHERE courses.name=course_name AND users.user_name=user_name_ AND roles.hidden=false
         FETCH FIRST ROW ONLY;
-
-    IF role_hidden THEN
-        RETURN false;
-    END IF
 
     IF role_type IN ('Instructor', 'AdminRole') THEN
         RETURN true;
@@ -106,7 +101,7 @@ $$;
 
 CREATE FUNCTION public.relative_url_root() RETURNS text
     LANGUAGE sql IMMUTABLE PARALLEL SAFE
-    AS $$SELECT text '/'$$;
+    AS $$SELECT text '/csc108'$$;
 
 
 SET default_tablespace = '';
@@ -4582,4 +4577,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220629225622'),
 ('20220707182822'),
 ('20220726142501'),
-('20220726201403');
+('20220726201403'),
+('20220815210513');
